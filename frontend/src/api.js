@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://student-grievance-system-2.onrender.com/api",
 });
 
-// Attach token automatically
+// attach token automatically
 API.interceptors.request.use((req) => {
   const token = localStorage.getItem("token");
   if (token) {
