@@ -1,6 +1,6 @@
 import { useState } from "react";
 import API from "../api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Login() {
   const [form, setForm] = useState({});
@@ -11,7 +11,7 @@ export default function Login() {
       const res = await API.post("/login", form);
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
-    } catch (err) {
+    } catch {
       alert("Invalid credentials");
     }
   };
@@ -20,23 +20,17 @@ export default function Login() {
     <div className="container">
       <h2>Login</h2>
 
-      <input
-        type="email"
-        placeholder="Email"
-        onChange={(e) =>
-          setForm({ ...form, email: e.target.value })
-        }
-      />
+      <input type="email" placeholder="Email"
+        onChange={e => setForm({...form, email: e.target.value})} />
 
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) =>
-          setForm({ ...form, password: e.target.value })
-        }
-      />
+      <input type="password" placeholder="Password"
+        onChange={e => setForm({...form, password: e.target.value})} />
 
       <button onClick={submit}>Login</button>
+
+      <p>
+        Don't have account? <Link to="/register">Register</Link>
+      </p>
     </div>
   );
 }
